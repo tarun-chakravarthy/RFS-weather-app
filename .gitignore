@@ -1,28 +1,36 @@
-# dependencies
-node_modules/
-
-# build output
-dist/
-build/
-
-# logs
+# Logs
+logs
 *.log
 npm-debug.log*
-pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# env files
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+build/
+coverage/
+
+# Environment files
 .env
 .env.*
 !.env.example
 
-# macOS
-.DS_Store
+# Local-only files
+*.local
 
-# editor
-.vscode/
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
 .idea/
-
-# misc
-coverage/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
