@@ -1,1 +1,76 @@
 @import "tailwindcss";
+
+/* ========================================
+   Color Palette: NSW Rural Fire Service
+   ======================================== */
+
+/* Brand Primitives */
+:root {
+  --rfs-navy: #003087;
+  --rfs-red: #C8102E;
+  --rfs-gold: #F4C300;
+  --rfs-white: #FFFFFF;
+
+  /* Light Theme Tokens */
+  --bg-app: #F4F6FA;
+  --bg-card: #FFFFFF;
+  --bg-header: #003087;
+  --border: #D8DEE9;
+  --text-primary: #0D1B2A;
+  --text-secondary: #3E5068;
+  --text-muted: #8A9BB0;
+  --accent-primary: #003087;
+  --accent-danger: #C8102E;
+  --accent-gold: #D4A800;
+
+  /* Fire Danger Levels */
+  --fire-low: #22C55E;
+  --fire-moderate: #F59E0B;
+  --fire-high: #F97316;
+  --fire-extreme: #C8102E;
+
+  /* Live Indicators */
+  --live-dot: #22C55E;
+
+  color-scheme: light;
+}
+
+/* Dark Theme Tokens */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-app: #0C1220;
+    --bg-card: #16202F;
+    --bg-header: #001A52;
+    --border: #1E2D42;
+    --text-primary: #EEF2FF;
+    --text-secondary: #7D9AB8;
+    --text-muted: #445D78;
+    --accent-primary: #3B7DD8;
+    --accent-danger: #E8385A;
+    --accent-gold: #F4C300;
+
+    /* Fire Danger Levels (same in dark) */
+    --fire-low: #22C55E;
+    --fire-moderate: #F59E0B;
+    --fire-high: #F97316;
+    --fire-extreme: #E8385A;
+
+    color-scheme: dark;
+  }
+}
+
+/* Base Styles */
+body {
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
