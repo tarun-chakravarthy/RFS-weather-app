@@ -1,12 +1,11 @@
 # RFS Weather App
 
-A full-stack weather application that displays current weather conditions for any location worldwide. Search for any city and instantly view temperature, "feels like" temperature, humidity, wind speed, and precipitation data with a clean, modern interface.
+A full-stack weather application that displays current weather conditions for any location in Australia. Search for any Australian city and instantly view temperature, "feels like" temperature, humidity, wind speed, and precipitation data with a clean, modern interface.
 
 ## Features
 
-- **Location Search**: Search for any city worldwide and get current weather conditions
+- **Location Search**: Search for any city in Australia and get current weather conditions
 - **Real-time Weather Data**: Temperature, "feels like" temperature, humidity, wind speed, and precipitation
-- **Dark Mode**: Toggle between light and dark themes with persistent preference
 - **Responsive Design**: Works seamlessly on desktop and mobile devices
 - **Error Handling**: Clear error messages for invalid locations or API issues
 
@@ -88,44 +87,48 @@ export OPENWEATHER_API_KEY=your_api_key && node dist/index.js
 
 ## API Endpoints
 
+
 ### GET `/api/weather`
 
-Fetch current weather data for a specified city.
+Fetch current weather data for a specified Australian city.
 
 **Query Parameters:**
-- `location` (string, required): City name
-  - Example: `?location=London`
+- `location` (string, required): Australian city name
   - Example: `?location=Sydney`
+  - Example: `?location=Melbourne`
+
 
 **Response:**
 ```json
 {
   "location": {
-    "name": "London",
-    "country": "GB",
-    "latitude": 51.5085,
-    "longitude": -0.1257
+    "name": "Sydney",
+    "country": "AU",
+    "latitude": -33.8688,
+    "longitude": 151.2093
   },
   "current": {
-    "temperature": 15.2,
-    "apparentTemperature": 14.8,
-    "humidity": 72,
+    "temperature": 22.1,
+    "apparentTemperature": 21.5,
+    "humidity": 60,
     "weatherCode": 0,
-    "windSpeedKph": 12.5,
+    "windSpeedKph": 15.2,
     "precipitation": 0
   },
   "lastUpdated": "2024-04-11T15:30:00.000Z"
 }
 ```
 
+
 **Error Response (Location Not Found):**
 ```json
 {
   "error": "Location not found",
-  "message": "Location not found: \"InvalidCity\"",
+  "message": "Location not found: \"InvalidCity\" (only Australian cities are supported)",
   "statusCode": 404
 }
 ```
+
 
 **Error Response (Missing Parameters):**
 ```json
@@ -171,7 +174,6 @@ RFS-weather-app/
 - `LoadingState.tsx` - Loading skeleton animation
 - `ErrorState.tsx` - Error message display
 - `EmptyState.tsx` - Initial state prompt
-- `ThemeToggle.tsx` - Light/dark mode toggle button
 
 **Server Services:**
 - `openmeteo.ts` - Weather and geocoding API integration
@@ -193,10 +195,11 @@ See the full reference in `client/src/types/weather.ts`.
 
 ## Limitations
 
+- **Australia Only**: Only Australian cities are supported for weather data
 - **No Forecast Data**: Currently displays only current weather conditions
 - **City Name Only**: Searches must use city names; coordinates-based lookups are not supported
 - **Rate Limiting**: OpenWeatherMap API has rate limits; free tier allows 60 calls/minute
-- **Disambiguation**: Ambiguous city names (e.g., "Springfield" in US) may return results for the most common location
+- **Disambiguation**: Ambiguous city names (e.g., "Springfield") may return results for the most common Australian location
 - **Location Accuracy**: Weather is tied to the official coordinates of the requested city
 
 ## Development Notes
