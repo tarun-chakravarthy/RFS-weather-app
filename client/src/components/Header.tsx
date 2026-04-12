@@ -13,7 +13,7 @@ export function Header() {
           <div
             className="flex items-center justify-center w-10 h-10 font-condensed font-bold text-xs text-white"
             style={{
-              backgroundColor: '#C8102E',
+              backgroundColor: 'var(--rfs-red)',
               clipPath: 'polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%)',
             }}
           >

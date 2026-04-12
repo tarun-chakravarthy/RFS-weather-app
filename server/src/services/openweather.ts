@@ -69,7 +69,7 @@ export async function getWeatherForLocation(locationName: string): Promise<Weath
       temperature: data.main.temp,
       apparentTemperature: data.main.feels_like,
       humidity: data.main.humidity,
-      weatherCode: 0, // OpenWeather uses different codes, we'll use 0 as placeholder
+      weatherCode: data.weather[0]?.id || 0, // Use actual OpenWeatherMap weather ID
       windSpeedKph: data.wind.speed * 3.6, // Convert m/s to km/h
       precipitation: data.rain?.['1h'] || 0,
     };
