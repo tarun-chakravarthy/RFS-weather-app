@@ -25,7 +25,7 @@ export function SearchBar({ onSearch, disabled = false }: SearchBarProps) {
     <form onSubmit={handleSubmit} className="w-full">
       <div className="relative flex items-center gap-2">
         <div className="absolute left-4 flex items-center justify-center pointer-events-none">
-          <Search className="w-5 h-5 text-slate-400 dark:text-slate-300" />
+          <Search className="w-5 h-5 text-text-muted" />
         </div>
 
         <input
@@ -36,12 +36,10 @@ export function SearchBar({ onSearch, disabled = false }: SearchBarProps) {
           placeholder="Enter city name..."
           className="
             flex-1 pl-12 pr-4 py-3
-            bg-white dark:bg-black
-            text-black dark:text-white
-            placeholder-slate-400 dark:placeholder-slate-300
-            border border-black dark:border-white
+            bg-bg-card border border-border
+            text-text-primary placeholder-text-muted
             rounded-lg
-            focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400
+            focus:outline-none focus:ring-2 focus:ring-accent-primary
             disabled:opacity-50 disabled:cursor-not-allowed
             transition-all
           "
@@ -59,7 +57,7 @@ export function SearchBar({ onSearch, disabled = false }: SearchBarProps) {
             hover:opacity-90 active:opacity-80
             disabled:opacity-50 disabled:cursor-not-allowed
             transition-all
-            flex-shrink-0
+            shrink-0
           "
         >
           Search

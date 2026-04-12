@@ -39,7 +39,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-bg-app dark:bg-black text-black dark:text-white border-black dark:border-white">
+    <div className="min-h-screen bg-bg-app text-text-primary border-border">
       <Header />
 
       <main className="max-w-6xl mx-auto px-6 py-12">
@@ -66,13 +66,13 @@ function App() {
         <section>
           {isLoading && <LoadingState />}
           {error && <ErrorState city={weather?.location.name} message={error} />}
-          {!isLoading && !error && weather && <WeatherDisplay weather={weather} isLoading={false} error={null} />}
+          {!isLoading && !error && weather && <WeatherDisplay weather={weather} />}
           {!isLoading && !error && !weather && <EmptyState />}
         </section>
       </main>
 
-      <footer className="bg-bg-header dark:bg-black text-black dark:text-white text-center py-8 mt-12 border-t border-black dark:border-white">
-        <p className="text-sm text-black dark:text-white opacity-70">
+      <footer className="bg-bg-header text-text-secondary text-center py-8 mt-12 border-t border-border">
+        <p className="text-sm opacity-70">
           Powered by OpenWeatherMap | NSW Rural Fire Service
         </p>
       </footer>

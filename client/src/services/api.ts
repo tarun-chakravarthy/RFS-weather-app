@@ -4,13 +4,11 @@
 
 import type { Weather, WeatherError } from "../types/weather.js";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
-
 /**
  * Fetch weather for a location
  */
 export async function fetchWeather(location: string): Promise<Weather> {
-  const url = new URL('/api/weather', API_URL);
+  const url = new URL('/api/weather', window.location.origin);
   url.searchParams.set('location', location);
 
   console.log(`Fetching from ${url.toString()}`);
@@ -35,7 +33,7 @@ export async function fetchWeather(location: string): Promise<Weather> {
  */
 export async function checkHealth(): Promise<boolean> {
   try {
-    const response = await fetch(`${API_URL}/api/health`);
+    const response = await fetch(new URL('/api/health', window.location.origin).toString());
     return response.ok;
   } catch {
     return false;

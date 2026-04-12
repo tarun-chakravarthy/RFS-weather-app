@@ -6,7 +6,7 @@
 export function Header() {
 
   return (
-    <header className="w-full bg-blue-900 dark:bg-slate-900 border-b border-black dark:border-white py-4">
+    <header className="w-full bg-bg-header border-b border-border py-4">
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center gap-3">
@@ -20,10 +20,10 @@ export function Header() {
             RFS
           </div>
           <div>
-            <h1 className="font-condensed font-bold text-lg uppercase text-black dark:text-white">
+            <h1 className="font-condensed font-bold text-lg uppercase text-text-primary">
               RFS Weather
             </h1>
-            <p className="font-condensed text-xs uppercase text-black dark:text-white opacity-70">
+            <p className="font-condensed text-xs uppercase text-text-secondary opacity-70">
               Fire Safety
             </p>
           </div>
@@ -32,7 +32,7 @@ export function Header() {
         {/* Live Indicator */}
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse-dot" />
-          <span className="font-mono text-xs uppercase text-black dark:text-white opacity-70">
+          <span className="font-mono text-xs uppercase text-text-secondary opacity-70">
             Live
           </span>
         </div>

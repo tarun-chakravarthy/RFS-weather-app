@@ -8,45 +8,11 @@ import { Droplets, Wind, CloudRain, MapPin } from "lucide-react";
 import { COUNTRY_NAMES, CITY_STATE_MAP } from "../constants/locationMaps";
 
 interface WeatherDisplayProps {
-  weather: Weather | null;
-  isLoading: boolean;
-  error: string | null;
+  weather: Weather;
 }
 
-export function WeatherDisplay({ weather, isLoading, error }: WeatherDisplayProps) {
-  // Loading state
-  if (isLoading) {
-    return (
-      <div className="text-center py-12">
-        <div className="animate-pulse text-text-secondary">
-          <div className="text-lg">Loading weather data...</div>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="text-center py-12">
-        <div className="bg-accent-danger/10 border border-accent-danger rounded-lg p-4 max-w-md mx-auto">
-          <div className="text-accent-danger font-medium">Error</div>
-          <div className="text-text-secondary text-sm mt-1">{error}</div>
-        </div>
-      </div>
-    );
-  }
-
-  if (!weather) {
-    return (
-      <div className="text-center py-12">
-        <div className="text-text-muted">
-          <div className="text-lg">Search for a location to see weather</div>
-        </div>
-      </div>
-    );
-  }
-
-  // Success state - display weather
+export function WeatherDisplay({ weather }: WeatherDisplayProps) {
+  // Display weather
   const temp = Math.round(weather.current.temperature);
   const feelsLike = Math.round(weather.current.apparentTemperature);
   const description = getWeatherDescription(weather.current.weatherCode);
@@ -57,10 +23,10 @@ export function WeatherDisplay({ weather, isLoading, error }: WeatherDisplayProp
 
   return (
     <div className="w-full max-w-md mx-auto">
-      <div className="bg-white dark:bg-black border border-black dark:border-white rounded-lg p-6 shadow-sm">
+      <div className="bg-bg-card border border-border rounded-lg p-6 shadow-sm">
         {/* Location Header */}
         <div className="mb-6">
-          <h2 className="text-2xl font-bold text-black dark:text-white">
+          <h2 className="text-2xl font-bold text-text-primary">
             {weather.location.name}
           </h2>
           <p className="text-text-secondary text-sm">
