@@ -59,6 +59,28 @@
   }
 }
 
+/* Dark Theme with class-based toggle */
+html.dark {
+  --bg-app: #0C1220;
+  --bg-card: #16202F;
+  --bg-header: #001A52;
+  --border: #1E2D42;
+  --text-primary: #EEF2FF;
+  --text-secondary: #7D9AB8;
+  --text-muted: #445D78;
+  --accent-primary: #3B7DD8;
+  --accent-danger: #E8385A;
+  --accent-gold: #F4C300;
+
+  /* Fire Danger Levels (same in dark) */
+  --fire-low: #22C55E;
+  --fire-moderate: #F59E0B;
+  --fire-high: #F97316;
+  --fire-extreme: #E8385A;
+
+  color-scheme: dark;
+}
+
 /* Base Styles */
 body {
   background-color: var(--bg-app);

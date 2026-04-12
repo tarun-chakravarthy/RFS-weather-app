@@ -37,6 +37,7 @@ export interface WeatherError {
   statusCode: number;
 }
 
+// Weather code descriptions
 export const WEATHER_CODE_MAP: Record<number, string> = {
   0: "Clear sky",
   1: "Mainly clear",

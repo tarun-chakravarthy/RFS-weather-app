@@ -4,6 +4,7 @@
 
 import type { Weather } from "../types/weather.js";
 import { getWeatherDescription } from "../types/weather.js";
+import { Droplets, Wind, CloudRain, MapPin } from "lucide-react";
 
 interface WeatherDisplayProps {
   weather: Weather | null;
@@ -51,10 +52,10 @@ export function WeatherDisplay({ weather, isLoading, error }: WeatherDisplayProp
 
   return (
     <div className="w-full max-w-md mx-auto">
-      <div className="bg-bg-card border border-border rounded-lg p-6 shadow-sm">
+      <div className="bg-white dark:bg-black border border-black dark:border-white rounded-lg p-6 shadow-sm">
         {/* Location Header */}
         <div className="mb-6">
-          <h2 className="text-2xl font-bold text-text-primary">
+          <h2 className="text-2xl font-bold text-black dark:text-white">
             {weather.location.name}
           </h2>
           <p className="text-text-secondary text-sm">
@@ -81,44 +82,64 @@ export function WeatherDisplay({ weather, isLoading, error }: WeatherDisplayProp
         {/* Weather Details Grid */}
         <div className="grid grid-cols-2 gap-4">
           {/* Humidity */}
-          <div className="p-3 bg-bg-app rounded-lg">
-            <div className="text-text-muted text-xs font-medium uppercase tracking-wide mb-1">
-              Humidity
+          <div className="p-4 bg-bg-app rounded-lg flex items-center gap-3">
+            <div className="shrink-0">
+              <Droplets className="text-accent-primary dark:text-blue-400" size={20} />
             </div>
-            <div className="text-xl font-bold text-text-primary">
-              {weather.current.humidity}%
+            <div className="flex-1">
+              <div className="text-text-muted text-xs font-medium uppercase tracking-wide mb-1">
+                Humidity
+              </div>
+              <div className="text-xl font-bold text-text-primary">
+                {weather.current.humidity}%
+              </div>
             </div>
           </div>
 
           {/* Wind Speed */}
-          <div className="p-3 bg-bg-app rounded-lg">
-            <div className="text-text-muted text-xs font-medium uppercase tracking-wide mb-1">
-              Wind
+          <div className="p-4 bg-bg-app rounded-lg flex items-center gap-3">
+            <div className="shrink-0">
+              <Wind className="text-accent-primary dark:text-blue-400" size={20} />
             </div>
-            <div className="text-xl font-bold text-text-primary">
-              {Math.round(weather.current.windSpeedKph)} km/h
+            <div className="flex-1">
+              <div className="text-text-muted text-xs font-medium uppercase tracking-wide mb-1">
+                Wind
+              </div>
+              <div className="text-xl font-bold text-text-primary">
+                {Math.round(weather.current.windSpeedKph)} km/h
+              </div>
             </div>
           </div>
 
           {/* Precipitation */}
-          <div className="p-3 bg-bg-app rounded-lg">
-            <div className="text-text-muted text-xs font-medium uppercase tracking-wide mb-1">
-              Precipitation
+          <div className="p-4 bg-bg-app rounded-lg flex items-center gap-3">
+            <div className="shrink-0">
+              <CloudRain className="text-accent-primary dark:text-blue-400" size={20} />
             </div>
-            <div className="text-xl font-bold text-text-primary">
-              {weather.current.precipitation.toFixed(1)} mm
+            <div className="flex-1">
+              <div className="text-text-muted text-xs font-medium uppercase tracking-wide mb-1">
+                Precipitation
+              </div>
+              <div className="text-xl font-bold text-text-primary">
+                {weather.current.precipitation.toFixed(1)} mm
+              </div>
             </div>
           </div>
 
           {/* Coordinates */}
-          <div className="p-3 bg-bg-app rounded-lg">
-            <div className="text-text-muted text-xs font-medium uppercase tracking-wide mb-1">
-              Location
+          <div className="p-4 bg-bg-app rounded-lg flex items-center gap-3">
+            <div className="shrink-0">
+              <MapPin className="text-accent-primary dark:text-blue-400" size={20} />
             </div>
-            <div className="text-xs text-text-primary font-mono">
-              {weather.location.latitude.toFixed(2)},
-              <br />
-              {weather.location.longitude.toFixed(2)}
+            <div className="flex-1">
+              <div className="text-text-muted text-xs font-medium uppercase tracking-wide mb-1">
+                Location
+              </div>
+              <div className="text-xs text-text-primary font-mono">
+                {weather.location.latitude.toFixed(2)},
+                <br />
+                {weather.location.longitude.toFixed(2)}
+              </div>
             </div>
           </div>
         </div>

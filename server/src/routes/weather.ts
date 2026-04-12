@@ -2,39 +2,20 @@
  * Weather API routes
  */
 
-import { Router, type Request, type Response } from 'express';
-import { getWeatherForLocation, getWeatherForCoordinates } from '../services/openmeteo.js';
+import { Router, type Request, type Response, type Express } from 'express';
+import { getWeatherForLocation } from '../services/openweather.js';
 import type { Weather, WeatherError } from '../types/weather.js';
 
-const router = Router();
+const router: ReturnType<typeof Router> = Router();
 
 /**
  * GET /api/weather
- * Query: location (required)
+ * Query: location (required) - City name
  * Returns: Weather data with temperature, humidity, conditions, etc.
  */
 router.get('/weather', async (req: Request, res: Response): Promise<void> => {
   try {
-    const { location, coordinates } = req.query;
-
-    if (coordinates && typeof coordinates === 'string') {
-      const [lat, lon] = coordinates.split(',').map(Number);
-      
-      if (isNaN(lat) || isNaN(lon)) {
-        const error: WeatherError = {
-          error: 'Invalid coordinates',
-          message: 'coordinates must be in format: latitude,longitude',
-          statusCode: 400,
-        };
-        res.status(400).json(error);
-        return;
-      }
-
-      console.log(`Weather request for coordinates: ${lat}, ${lon}`);
-      const weather = await getWeatherForCoordinates(lat, lon);
-      res.json(weather);
-      return;
-    }
+    const { location } = req.query;
 
     if (!location || typeof location !== 'string') {
       const error: WeatherError = {

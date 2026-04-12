@@ -42,30 +42,4 @@ export async function checkHealth(): Promise<boolean> {
   }
 }
 
-/**
- * Fetch weather using coordinates (latitude, longitude)
- * This is used for geolocation-based weather
- */
-export async function fetchWeatherByCoordinates(
-  latitude: number,
-  longitude: number
-): Promise<Weather> {
-  const url = new URL("/api/weather", API_URL);
-  url.searchParams.set("coordinates", `${latitude},${longitude}`);
 
-  console.log(`Fetching from ${url.toString()}`);
-
-  const response = await fetch(url.toString());
-  const data = await response.json() as Weather | WeatherError;
-
-  if (!response.ok) {
-    const error = data as WeatherError;
-    const message = error.message || response.statusText;
-    console.error(`API Error: ${message}`);
-    throw new Error(message);
-  }
-
-  const weather = data as Weather;
-  console.log(`Got weather for ${weather.location.name}`);
-  return weather;
-}

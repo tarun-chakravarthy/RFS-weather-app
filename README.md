@@ -1,2 +1,235 @@
-# RFS-weather
-full-stack application that consumes a public weather API (such as Open-Meteo or OpenWeatherMap) to display current conditions for a user specified city.
+# RFS Weather App
+
+A full-stack weather application that displays current weather conditions for any location worldwide. Search for any city and instantly view temperature, "feels like" temperature, humidity, wind speed, and precipitation data with a clean, modern interface.
+
+## Features
+
+- **Location Search**: Search for any city worldwide and get current weather conditions
+- **Real-time Weather Data**: Temperature, "feels like" temperature, humidity, wind speed, and precipitation
+- **Dark Mode**: Toggle between light and dark themes with persistent preference
+- **Responsive Design**: Works seamlessly on desktop and mobile devices
+- **Error Handling**: Clear error messages for invalid locations or API issues
+
+## Tech Stack
+
+**Frontend:**
+- React 19.2.4 with TypeScript
+- Vite 8.0.4 (build tool)
+- Tailwind CSS 4.2.2 (styling)
+- lucide-react (icons)
+
+**Backend:**
+- Express.js with TypeScript
+- Node.js runtime
+
+**API:**
+- [OpenWeatherMap API](https://openweathermap.org/api) - Real-time weather data (requires free API key)
+
+## Setup & Installation
+
+### Prerequisites
+- Node.js (v18+)
+- pnpm (or npm/yarn)
+- **OpenWeatherMap API Key** (free tier available at https://openweathermap.org/api)
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd RFS-weather-app
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   pnpm install
+   ```
+
+3. **Set up your OpenWeatherMap API Key:**
+   
+   Configure the `.env` file in the `server` directory with your API key:
+   ```bash
+   # server/.env
+   OPENWEATHER_API_KEY=your_openweather_api_key_here
+   ```
+   
+   Get your free API key at: https://openweathermap.org/api
+   
+   A template file `server/.env.example` is provided as reference.
+
+### Running the Application
+
+**Development Mode:**
+```bash
+# From project root, starts both client and server
+pnpm dev
+```
+
+Or run them separately:
+```bash
+# Terminal 1 - Backend server (runs on http://localhost:3001)
+cd server
+pnpm dev
+
+# Terminal 2 - Frontend dev server (runs on http://localhost:5173)
+cd client
+pnpm dev
+```
+
+**Production Build:**
+```bash
+# Build both client and server
+pnpm build
+
+# Run production server (from server directory)
+cd server
+export OPENWEATHER_API_KEY=your_api_key && node dist/index.js
+```
+
+## API Endpoints
+
+### GET `/api/weather`
+
+Fetch current weather data for a specified city.
+
+**Query Parameters:**
+- `location` (string, required): City name
+  - Example: `?location=London`
+  - Example: `?location=Sydney`
+
+**Response:**
+```json
+{
+  "location": {
+    "name": "London",
+    "country": "GB",
+    "latitude": 51.5085,
+    "longitude": -0.1257
+  },
+  "current": {
+    "temperature": 15.2,
+    "apparentTemperature": 14.8,
+    "humidity": 72,
+    "weatherCode": 0,
+    "windSpeedKph": 12.5,
+    "precipitation": 0
+  },
+  "lastUpdated": "2024-04-11T15:30:00.000Z"
+}
+```
+
+**Error Response (Location Not Found):**
+```json
+{
+  "error": "Location not found",
+  "message": "Location not found: \"InvalidCity\"",
+  "statusCode": 404
+}
+```
+
+**Error Response (Missing Parameters):**
+```json
+{
+  "error": "Missing location",
+  "message": "location query parameter is required",
+  "statusCode": 400
+}
+```
+
+## Project Structure
+
+```
+RFS-weather-app/
+├── client/                    # Frontend React application
+│   ├── src/
+│   │   ├── components/       # React components
+│   │   ├── services/         # API and utility services
+│   │   ├── types/            # TypeScript interfaces
+│   │   ├── hooks/            # Custom React hooks (dark mode)
+│   │   ├── App.tsx           # Root component
+│   │   └── main.tsx          # Entry point
+│   └── package.json
+├── server/                    # Backend Express application
+│   ├── src/
+│   │   ├── routes/           # API routes
+│   │   ├── services/         # Business logic (weather fetching, geocoding)
+│   │   ├── types/            # TypeScript interfaces
+│   │   ├── index.ts          # Server entry point
+│   │   └── middleware/       # Express middleware
+│   └── package.json
+├── pnpm-workspace.yaml        # pnpm workspace configuration
+└── README.md
+```
+
+## Components
+
+**Frontend Components:**
+- `App.tsx` - Main application component with state management
+- `Header.tsx` - App header with branding and theme toggle
+- `SearchBar.tsx` - Location search input
+- `WeatherDisplay.tsx` - Current weather information display
+- `LoadingState.tsx` - Loading skeleton animation
+- `ErrorState.tsx` - Error message display
+- `EmptyState.tsx` - Initial state prompt
+- `ThemeToggle.tsx` - Light/dark mode toggle button
+
+**Server Services:**
+- `openmeteo.ts` - Weather and geocoding API integration
+- `weather.ts` - Route handlers for weather API
+
+## Weather Code Reference
+
+The application uses WMO weather codes. Common codes:
+- `0` - Clear sky
+- `1` - Mainly clear
+- `2` - Partly cloudy
+- `3` - Overcast
+- `45-48` - Foggy
+- `51-65` - Drizzle and rain
+- `71-86` - Snow
+- `95-99` - Thunderstorm
+
+See the full reference in `client/src/types/weather.ts`.
+
+## Limitations
+
+- **No Forecast Data**: Currently displays only current weather conditions
+- **City Name Only**: Searches must use city names; coordinates-based lookups are not supported
+- **Rate Limiting**: OpenWeatherMap API has rate limits; free tier allows 60 calls/minute
+- **Disambiguation**: Ambiguous city names (e.g., "Springfield" in US) may return results for the most common location
+- **Location Accuracy**: Weather is tied to the official coordinates of the requested city
+
+## Development Notes
+
+- The app uses CSS custom properties for theming, enabling smooth dark/light mode transitions
+- Dark mode preference is persisted in localStorage
+- Weather data is fetched from the free OpenWeatherMap API
+- The application follows component-driven development with atomic design principles
+- All API calls are made from the backend to avoid CORS issues and protect the API key
+
+## Troubleshooting
+
+**Build Issues:**
+- Ensure you're using Node.js v18 or higher
+- Clear `node_modules` and pnpm cache: `pnpm install --force`
+
+**API Not Responding:**
+- Verify the `OPENWEATHER_API_KEY` environment variable is set
+- Check that your API key is valid (sign up at https://openweathermap.org/api if needed)
+- Verify the server is running on port 3000
+- Check browser console for CORS errors
+- Verify internet connectivity
+
+**"Location not found" Errors:**
+- Try searching with a larger city name (e.g., "London" instead of a suburb)
+- Note that OpenWeatherMap is case-insensitive
+- Some very small towns may not be in the database
+
+**API Rate Limiting:**
+- Free tier: max 60 calls/minute per API key
+- If you hit the limit, wait a minute and try again
+- Consider upgrading to a paid tier for higher limits
+
+## Author
+
+RFS Weather App - Assignment Project
