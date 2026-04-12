@@ -60,7 +60,7 @@ A full-stack weather application that displays current weather conditions for an
 
 **Development Mode:**
 ```bash
-# From project root, starts both client and server
+# From project root, starts both client and server concurrently
 pnpm dev
 ```
 
@@ -74,6 +74,8 @@ pnpm dev
 cd client
 pnpm dev
 ```
+
+The frontend is configured to proxy API requests to the backend via Vite's dev server, so CORS is automatically handled.
 
 **Production Build:**
 ```bash
@@ -146,7 +148,8 @@ RFS-weather-app/
 ├── client/                    # Frontend React application
 │   ├── src/
 │   │   ├── components/       # React components
-│   │   ├── services/         # API and utility services
+│   │   ├── constants/        # Application constants (cities, mappings)
+│   │   ├── services/         # API integration
 │   │   ├── types/            # TypeScript interfaces
 │   │   ├── App.tsx           # Root component
 │   │   └── main.tsx          # Entry point
@@ -154,10 +157,9 @@ RFS-weather-app/
 ├── server/                    # Backend Express application
 │   ├── src/
 │   │   ├── routes/           # API routes
-│   │   ├── services/         # Business logic (weather fetching, geocoding)
+│   │   ├── services/         # Business logic (OpenWeatherMap integration)
 │   │   ├── types/            # TypeScript interfaces
-│   │   ├── index.ts          # Server entry point
-│   │   └── middleware/       # Express middleware
+│   │   └── index.ts          # Server entry point
 │   └── package.json
 ├── pnpm-workspace.yaml        # pnpm workspace configuration
 └── README.md
@@ -167,30 +169,20 @@ RFS-weather-app/
 
 **Frontend Components:**
 - `App.tsx` - Main application component with state management
-- `Header.tsx` - App header with branding and theme toggle
-- `SearchBar.tsx` - Location search input
-- `WeatherDisplay.tsx` - Current weather information display
+- `Header.tsx` - App header with branding and live indicator
+- `SearchBar.tsx` - Location search input with quick-access bushfire city buttons
+- `WeatherDisplay.tsx` - Current weather information display with location, temperature, and details
 - `LoadingState.tsx` - Loading skeleton animation
 - `ErrorState.tsx` - Error message display
 - `EmptyState.tsx` - Initial state prompt
 
 **Server Services:**
-- `openmeteo.ts` - Weather and geocoding API integration
-- `weather.ts` - Route handlers for weather API
+- `openweather.ts` - OpenWeatherMap API integration and location validation
+- `weather.ts` (routes) - GET `/api/weather` endpoint handler
 
 ## Weather Code Reference
 
-The application uses WMO weather codes. Common codes:
-- `0` - Clear sky
-- `1` - Mainly clear
-- `2` - Partly cloudy
-- `3` - Overcast
-- `45-48` - Foggy
-- `51-65` - Drizzle and rain
-- `71-86` - Snow
-- `95-99` - Thunderstorm
-
-See the full reference in `client/src/types/weather.ts`.
+The application displays weather information from OpenWeatherMap. For weather code details, visit: https://openweathermap.org/weather-conditions
 
 
 ## Assumptions
@@ -212,9 +204,10 @@ See the full reference in `client/src/types/weather.ts`.
 - **Location Accuracy**: Weather is tied to the official coordinates of the requested city
 
 ## Development Notes
-- Weather data is fetched from the free OpenWeatherMap API
-- The application follows component-driven development with atomic design principles
-- All API calls are made from the backend to avoid CORS issues and protect the API key
+- **Design System**: Uses CSS custom properties for consistent theming across light and dark modes
+- **Component Architecture**: Follows component-driven development with clear separation of concerns
+- **API Security**: All weather API calls are made from the backend to avoid CORS issues and protect the API key
+- **Australia-Only**: Backend validates that all city searches return Australian locations only
 
 ## Troubleshooting
 
@@ -225,14 +218,15 @@ See the full reference in `client/src/types/weather.ts`.
 **API Not Responding:**
 - Verify the `OPENWEATHER_API_KEY` environment variable is set
 - Check that your API key is valid (sign up at https://openweathermap.org/api if needed)
-- Verify the server is running on port 3000
+- Verify the server is running on port 3001
 - Check browser console for CORS errors
 - Verify internet connectivity
 
 **"Location not found" Errors:**
-- Try searching with a larger city name (e.g., "London" instead of a suburb)
+- Try searching with a major Australian city name (e.g., "Sydney", "Melbourne", "Brisbane")
 - Note that OpenWeatherMap is case-insensitive
-- Some very small towns may not be in the database
+- Only Australian cities are supported; searches for non-Australian locations will be rejected
+- Some very small towns may not be in the OpenWeatherMap database
 
 **API Rate Limiting:**
 - Free tier: max 60 calls/minute per API key
