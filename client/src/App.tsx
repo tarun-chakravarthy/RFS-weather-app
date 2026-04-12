@@ -11,6 +11,7 @@ import { WeatherDisplay } from "./components/WeatherDisplay.js";
 import { LoadingState } from "./components/LoadingState.js";
 import { ErrorState } from "./components/ErrorState.js";
 import { EmptyState } from "./components/EmptyState.js";
+import { NSW_BUSHFIRE_CITIES } from "./constants/nswRegions";
 import "./App.css";
 
 function App() {
@@ -45,6 +46,20 @@ function App() {
         {/* Search Bar */}
         <section className="mb-12 flex flex-col gap-4">
           <SearchBar onSearch={handleSearch} disabled={isLoading} />
+          <div className="flex flex-wrap gap-2 mt-2">
+            {NSW_BUSHFIRE_CITIES.map((entry) => (
+              <button
+                key={entry.city}
+                type="button"
+                className="px-4 py-2 bg-orange-600 text-white rounded-lg font-semibold hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-400 transition-all"
+                onClick={() => handleSearch(entry.city)}
+                disabled={isLoading}
+                aria-label={`Show weather for ${entry.city}`}
+              >
+                {entry.city}
+              </button>
+            ))}
+          </div>
         </section>
 
         {/* Weather Display */}

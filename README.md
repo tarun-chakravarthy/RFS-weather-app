@@ -148,7 +148,6 @@ RFS-weather-app/
 │   │   ├── components/       # React components
 │   │   ├── services/         # API and utility services
 │   │   ├── types/            # TypeScript interfaces
-│   │   ├── hooks/            # Custom React hooks (dark mode)
 │   │   ├── App.tsx           # Root component
 │   │   └── main.tsx          # Entry point
 │   └── package.json
@@ -193,6 +192,16 @@ The application uses WMO weather codes. Common codes:
 
 See the full reference in `client/src/types/weather.ts`.
 
+
+## Assumptions
+
+- **Country Restriction**: Only Australian cities are supported. Searches for cities outside Australia will return an error.
+- **City Name Input**: Users must enter valid Australian city names. No fuzzy matching or suggestions are provided.
+- **Weather Data**: Only current weather conditions are shown (no forecast or historical data).
+- **Weather Codes**: The app uses a simplified mapping for weather codes and may not show all possible OpenWeatherMap conditions.
+- **Bushfire-Prone Cities**: The quick-access buttons under the search bar are based on commonly recognized bushfire-prone cities in NSW.
+- **API Source**: All weather data is fetched from the free OpenWeatherMap API via the backend.
+
 ## Limitations
 
 - **Australia Only**: Only Australian cities are supported for weather data
@@ -203,9 +212,6 @@ See the full reference in `client/src/types/weather.ts`.
 - **Location Accuracy**: Weather is tied to the official coordinates of the requested city
 
 ## Development Notes
-
-- The app uses CSS custom properties for theming, enabling smooth dark/light mode transitions
-- Dark mode preference is persisted in localStorage
 - Weather data is fetched from the free OpenWeatherMap API
 - The application follows component-driven development with atomic design principles
 - All API calls are made from the backend to avoid CORS issues and protect the API key

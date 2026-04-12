@@ -5,6 +5,7 @@
 import type { Weather } from "../types/weather.js";
 import { getWeatherDescription } from "../types/weather.js";
 import { Droplets, Wind, CloudRain, MapPin } from "lucide-react";
+import { COUNTRY_NAMES, CITY_STATE_MAP } from "../constants/locationMaps";
 
 interface WeatherDisplayProps {
   weather: Weather | null;
@@ -50,6 +51,10 @@ export function WeatherDisplay({ weather, isLoading, error }: WeatherDisplayProp
   const feelsLike = Math.round(weather.current.apparentTemperature);
   const description = getWeatherDescription(weather.current.weatherCode);
 
+  // Get state and full country name if available
+  const state = CITY_STATE_MAP[weather.location.name] || "";
+  const countryFull = COUNTRY_NAMES[weather.location.country] || weather.location.country;
+
   return (
     <div className="w-full max-w-md mx-auto">
       <div className="bg-white dark:bg-black border border-black dark:border-white rounded-lg p-6 shadow-sm">
@@ -59,7 +64,7 @@ export function WeatherDisplay({ weather, isLoading, error }: WeatherDisplayProp
             {weather.location.name}
           </h2>
           <p className="text-text-secondary text-sm">
-            {weather.location.country}
+            {state && <span>{state}, </span>}{countryFull}
           </p>
           <p className="text-text-muted text-xs mt-1">
             Updated: {new Date(weather.lastUpdated).toLocaleTimeString()}

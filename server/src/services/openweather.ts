@@ -60,6 +60,11 @@ export async function getWeatherForLocation(locationName: string): Promise<Weath
       };
     };
 
+    // Restrict to Australia only
+    if (data.sys.country !== 'AU') {
+      throw new Error(`Only Australian locations are supported. You searched for: "${locationName}" (${data.name}, ${data.sys.country})`);
+    }
+
     const currentWeather: CurrentWeather = {
       temperature: data.main.temp,
       apparentTemperature: data.main.feels_like,
