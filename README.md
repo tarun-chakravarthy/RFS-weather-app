@@ -191,7 +191,19 @@ RFS-weather-app/
 ├── pnpm-workspace.yaml
 └── README.md
 ```
+## Technical Decisions
 
+- **pnpm workspaces** — Single repo without duplicated node_modules. Easier to work on client and server together, simpler for reviewers.
+
+- **OpenWeatherMap API** — Has weather data and reverse geocoding in one place, so the server can automatically look up state/province from coordinates. No hardcoding needed.
+
+- **Backend proxy for API calls** — Keeps the API key secure, avoids CORS issues, and gives me one place to shape the response into clean types.
+
+- **TypeScript interfaces first** — Defined `Weather`, `Location`, `CurrentWeather` before writing components or routes. Catches type mismatches at build time, not runtime.
+
+- **useState for state** — The app has one search flow and one piece of state. Redux felt like overkill.
+
+- **Server-side validation** — Australia-only restriction is enforced on the server, so it can't be bypassed from the browser.
 
 ## Assumptions
 
