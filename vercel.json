@@ -1,7 +1,5 @@
 {
-  "version": 2,
-  "buildCommand": "pnpm --filter=client build && test -d client/dist && mv client/dist dist",
-  "installCommand": "pnpm install --frozen-lockfile",
+  "buildCommand": "pnpm build",
   "outputDirectory": "dist",
-  "framework": "vite"
+  "installCommand": "pnpm install"
 }
