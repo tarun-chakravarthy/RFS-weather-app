@@ -50,7 +50,7 @@ export function SearchBar({ onSearch, disabled = false }: SearchBarProps) {
           disabled={disabled || !input.trim()}
           className="
             px-4 sm:px-6 py-2 sm:py-3
-            bg-accent-primary dark:bg-blue-500
+            bg-accent-primary
             text-white
             font-condensed font-bold uppercase text-sm
             rounded-lg

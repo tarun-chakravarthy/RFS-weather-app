@@ -2,7 +2,7 @@
  * Weather API routes
  */
 
-import { Router, type Request, type Response, type Express } from 'express';
+import { Router, type Request, type Response } from 'express';
 import { getWeatherForLocation } from '../services/openweather.js';
 import type { Weather, WeatherError } from '../types/weather.js';
 
