@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "buildCommand": "pnpm -r build",
+  "public": false,
+  "projects": {
+    "client": {
+      "name": "rfs-weather-client",
+      "buildCommand": "pnpm build",
+      "outputDirectory": "dist"
+    },
+    "server": {
+      "name": "rfs-weather-server",
+      "buildCommand": "pnpm build",
+      "startCommand": "node dist/index.js"
+    }
+  },
+  "routes": [
+    { "src": "/api/(.*)", "dest": "server/dist/index.js" },
+    { "src": "/(.*)", "dest": "client/dist/index.html" }
+  ]
+}

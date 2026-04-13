@@ -154,3 +154,11 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+/* ========================================
+   Reusable Utility Classes
+   ======================================== */
+
+.grid-item-half {
+  width: calc(50% - 0.5rem);
+}

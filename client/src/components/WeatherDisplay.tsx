@@ -49,10 +49,10 @@ export function WeatherDisplay({ weather }: WeatherDisplayProps) {
           </div>
         </div>
 
-        {/* Weather Details Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {/* Weather Details */}
+        <div className="flex flex-wrap gap-4">
           {/* Humidity */}
-          <div className="p-4 bg-bg-app rounded-lg flex items-center gap-3">
+          <div className="grid-item-half p-4 bg-bg-app rounded-lg flex items-center gap-3">
             <div className="shrink-0">
               <Droplets className="text-accent-primary dark:text-blue-400" size={20} />
             </div>
@@ -67,7 +67,7 @@ export function WeatherDisplay({ weather }: WeatherDisplayProps) {
           </div>
 
           {/* Wind Speed */}
-          <div className="p-4 bg-bg-app rounded-lg flex items-center gap-3">
+          <div className="grid-item-half p-4 bg-bg-app rounded-lg flex items-center gap-3">
             <div className="shrink-0">
               <Wind className="text-accent-primary dark:text-blue-400" size={20} />
             </div>
@@ -82,7 +82,7 @@ export function WeatherDisplay({ weather }: WeatherDisplayProps) {
           </div>
 
           {/* Precipitation */}
-          <div className="p-4 bg-bg-app rounded-lg flex items-center gap-3">
+          <div className="grid-item-half p-4 bg-bg-app rounded-lg flex items-center gap-3">
             <div className="shrink-0">
               <CloudRain className="text-accent-primary dark:text-blue-400" size={20} />
             </div>
@@ -97,7 +97,7 @@ export function WeatherDisplay({ weather }: WeatherDisplayProps) {
           </div>
 
           {/* Coordinates */}
-          <div className="p-4 bg-bg-app rounded-lg flex items-center gap-3">
+          <div className="grid-item-half p-4 bg-bg-app rounded-lg flex items-center gap-3">
             <div className="shrink-0">
               <MapPin className="text-accent-primary dark:text-blue-400" size={20} />
             </div>
