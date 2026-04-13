@@ -6,14 +6,38 @@
 import type { CurrentWeather, Location, Weather } from '../types/weather.js';
 
 const OPENWEATHER_API = 'https://api.openweathermap.org/data/2.5/weather';
+const OPENWEATHER_GEO_API = 'https://api.openweathermap.org/geo/1.0/reverse';
+
+/**
+ * Get state/province name using reverse geocoding
+ */
+async function getStateForLocation(lat: number, lon: number, apiKey: string): Promise<string> {
+  try {
+    const params = new URLSearchParams({
+      lat: String(lat),
+      lon: String(lon),
+      limit: '1',
+      appid: apiKey,
+    });
+
+    const response = await fetch(`${OPENWEATHER_GEO_API}?${params}`);
+    const data = await response.json() as Array<{
+      state?: string;
+    }>;
+
+    // Return state if available, otherwise empty string
+    return data[0]?.state || '';
+  } catch (error) {
+    // If reverse geocoding fails, just return empty string (state won't be displayed)
+    return '';
+  }
+}
 
 /**
  * Fetch weather data for a location by city name
  */
 export async function getWeatherForLocation(locationName: string): Promise<Weather> {
   try {
-    console.log(`Fetching weather for: "${locationName}"`);
-
     const apiKey = process.env.OPENWEATHER_API_KEY;
     if (!apiKey) {
       throw new Error('OpenWeather API key not configured. Set OPENWEATHER_API_KEY environment variable.');
@@ -49,6 +73,7 @@ export async function getWeatherForLocation(locationName: string): Promise<Weath
         humidity: number;
       };
       weather: Array<{
+        id: number;
         main: string;
         description: string;
       }>;
@@ -65,6 +90,9 @@ export async function getWeatherForLocation(locationName: string): Promise<Weath
       throw new Error(`Only Australian locations are supported. You searched for: "${locationName}" (${data.name}, ${data.sys.country})`);
     }
 
+    // Get state from reverse geocoding
+    const state = await getStateForLocation(data.coord.lat, data.coord.lon, apiKey);
+
     const currentWeather: CurrentWeather = {
       temperature: data.main.temp,
       apparentTemperature: data.main.feels_like,
@@ -78,6 +106,7 @@ export async function getWeatherForLocation(locationName: string): Promise<Weath
       location: {
         name: data.name,
         country: data.sys.country,
+        state: state,
         latitude: data.coord.lat,
         longitude: data.coord.lon,
       },
@@ -85,7 +114,6 @@ export async function getWeatherForLocation(locationName: string): Promise<Weath
       lastUpdated: new Date().toISOString(),
     };
 
-    console.log(`Weather data retrieved for ${data.name}, ${data.sys.country}`);
     return weather;
   } catch (error) {
     console.error('Error fetching weather:', error);

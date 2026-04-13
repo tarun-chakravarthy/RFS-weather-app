@@ -3,16 +3,6 @@
  */
 
 /**
- * Location data from geocoding API
- */
-export interface GeocodingResult {
-  name: string;
-  latitude: number;
-  longitude: number;
-  country: string;
-}
-
-/**
  * Current weather data
  */
 export interface CurrentWeather {
@@ -30,6 +20,7 @@ export interface CurrentWeather {
 export interface Location {
   name: string;
   country: string;
+  state: string; // State/province (e.g., "New South Wales")
   latitude: number;
   longitude: number;
 }

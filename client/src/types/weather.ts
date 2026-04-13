@@ -2,13 +2,6 @@
  * Weather type definitions (must match server types)
  */
 
-export interface GeocodingResult {
-  name: string;
-  latitude: number;
-  longitude: number;
-  country: string;
-}
-
 export interface CurrentWeather {
   temperature: number;
   apparentTemperature: number;
@@ -21,6 +14,7 @@ export interface CurrentWeather {
 export interface Location {
   name: string;
   country: string;
+  state: string;
   latitude: number;
   longitude: number;
 }

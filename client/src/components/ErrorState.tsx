@@ -11,8 +11,8 @@ interface ErrorStateProps {
 
 export function ErrorState({ city, message }: ErrorStateProps) {
   return (
-    <div className="flex justify-center py-12">
-      <div className="bg-accent-danger/10 border-2 border-accent-danger rounded-lg p-8 max-w-md text-center">
+    <div className="flex justify-center py-8 sm:py-12 px-4">
+      <div className="bg-accent-danger/10 border-2 border-accent-danger rounded-lg p-6 sm:p-8 max-w-md text-center">
         <div className="flex justify-center mb-4">
           <AlertCircle className="w-12 h-12 text-accent-danger" />
         </div>

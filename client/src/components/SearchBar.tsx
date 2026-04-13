@@ -35,7 +35,7 @@ export function SearchBar({ onSearch, disabled = false }: SearchBarProps) {
           disabled={disabled}
           placeholder="Enter city name..."
           className="
-            flex-1 pl-12 pr-4 py-3
+            flex-1 pl-10 sm:pl-12 pr-3 sm:pr-4 py-2 sm:py-3
             bg-bg-card border border-border
             text-text-primary placeholder-text-muted
             rounded-lg
@@ -49,7 +49,7 @@ export function SearchBar({ onSearch, disabled = false }: SearchBarProps) {
           type="submit"
           disabled={disabled || !input.trim()}
           className="
-            px-6 py-3
+            px-4 sm:px-6 py-2 sm:py-3
             bg-accent-primary dark:bg-blue-500
             text-white
             font-condensed font-bold uppercase text-sm

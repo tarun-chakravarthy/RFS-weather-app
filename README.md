@@ -87,6 +87,15 @@ cd server
 export OPENWEATHER_API_KEY=your_api_key && node dist/index.js
 ```
 
+## How It Works
+
+The app uses OpenWeatherMap's **weather and reverse-geocoding APIs** to:
+1. Find the location coordinates for your search
+2. Get real-time weather data
+3. Determine the state/province using latitude and longitude
+
+This means state information is always accurate and updates automatically—no hardcoding needed.
+
 ## API Endpoints
 
 
@@ -106,6 +115,7 @@ Fetch current weather data for a specified Australian city.
   "location": {
     "name": "Sydney",
     "country": "AU",
+    "state": "New South Wales",
     "latitude": -33.8688,
     "longitude": 151.2093
   },

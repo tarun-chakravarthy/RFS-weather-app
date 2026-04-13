@@ -3,27 +3,25 @@
  * Simple RFS branding header
  */
 
+import rfsLogo from '../assets/rfs-logo.svg';
+
 export function Header() {
 
   return (
-    <header className="w-full bg-bg-header border-b border-border py-4">
-      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
+    <header className="w-full bg-bg-header border-b border-border py-3 sm:py-4">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center gap-3">
-          <div
-            className="flex items-center justify-center w-10 h-10 font-condensed font-bold text-xs text-white"
-            style={{
-              backgroundColor: 'var(--rfs-red)',
-              clipPath: 'polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%)',
-            }}
-          >
-            RFS
-          </div>
+        <div className="flex items-center gap-2 sm:gap-3">
+          <img 
+            src={rfsLogo} 
+            alt="RFS Logo" 
+            className="w-9 h-9 sm:w-10 sm:h-10 shrink-0"
+          />
           <div>
-            <h1 className="font-condensed font-bold text-lg uppercase text-text-primary">
+            <h1 className="font-condensed font-bold text-base sm:text-lg uppercase text-text-primary">
               RFS Weather
             </h1>
-            <p className="font-condensed text-xs uppercase text-text-secondary opacity-70">
+            <p className="font-condensed text-xs uppercase text-text-secondary opacity-70 hidden sm:block">
               Fire Safety
             </p>
           </div>

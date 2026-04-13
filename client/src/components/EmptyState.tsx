@@ -6,8 +6,8 @@ import { Search } from 'lucide-react';
 
 export function EmptyState() {
   return (
-    <div className="flex justify-center py-12">
-      <div className="bg-bg-card border border-border rounded-lg p-8 max-w-md text-center">
+    <div className="flex justify-center py-8 sm:py-12 px-4">
+      <div className="bg-bg-card border border-border rounded-lg p-6 sm:p-8 max-w-md text-center">
         <div className="flex justify-center mb-4">
           <Search className="w-12 h-12 text-text-muted" />
         </div>
